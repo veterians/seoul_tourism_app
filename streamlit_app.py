@@ -18,7 +18,7 @@ st.set_page_config(
 # 필요한 유틸리티 및 페이지 모듈 임포트
 from utils.ui import apply_custom_css
 from utils.data_loader import init_session_state
-from pages import login, menu, map, course, history
+from pages import login, menu, map, course, history, settings
 # settings 모듈 import 제거
 
 # CSS 스타일 적용
