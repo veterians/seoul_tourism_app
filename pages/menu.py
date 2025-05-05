@@ -54,6 +54,18 @@ def show():
         if st.button("관광 이력 보기", key="history_button", use_container_width=True):
             change_page("history")
             st.rerun()
+    
+    with col2:
+        st.markdown("""
+        <div class="card">
+            <h3>⚙️ 설정</h3>
+            <p>앱 설정 및 환경설정을 변경합니다.</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        if st.button("설정", key="settings_button", use_container_width=True):
+            change_page("settings")
+            st.rerun()
             
     # 로그아웃 버튼
     st.markdown("---")
