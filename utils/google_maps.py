@@ -275,4 +275,80 @@ def create_google_maps_html(api_key, center_lat, center_lng, markers=None, zoom=
                                 new google.maps.Marker({{
                                     position: pos,
                                     map: map,
-                                    title: '
+                                    title: '내 위치',
+                                    icon: {{
+                                        path: google.maps.SymbolPath.CIRCLE,
+                                        fillColor: '#4285F4',
+                                        fillOpacity: 1,
+                                        strokeColor: '#FFFFFF',
+                                        strokeWeight: 2,
+                                        scale: 8
+                                    }}
+                                }});
+                            }},
+                            () => {{
+                                alert("위치 정보를 가져오는데 실패했습니다.");
+                            }}
+                        );
+                    }} else {{
+                        alert("이 브라우저에서는 위치 정보 기능을 지원하지 않습니다.");
+                    }}
+                }});
+                
+                map.controls[google.maps.ControlPosition.TOP_RIGHT].push(locationButton);
+                
+                // 범례를 지도에 추가
+                map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
+                    document.getElementById('legend')
+                );
+                
+                // 마커 추가
+                {markers_js}
+                
+                // 마커 클러스터링
+                {clustering_js}
+                
+                // 필터링 함수
+                {filter_js}
+                
+                // 지도 클릭 이벤트
+                map.addListener('click', function(event) {{
+                    // 열린 정보창 닫기
+                    closeAllInfoWindows();
+                    
+                    // 바운스 애니메이션 중지
+                    if (currentMarker) currentMarker.setAnimation(null);
+                    
+                    // 클릭 이벤트 데이터 전달
+                    window.parent.postMessage({{
+                        'type': 'map_click',
+                        'lat': event.latLng.lat(),
+                        'lng': event.latLng.lng()
+                    }}, '*');
+                }});
+            }}
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={api_key}&callback=initMap&language={language}" async defer></script>
+    </body>
+    </html>
+    """
+    
+    return html
+
+def show_google_map(api_key, center_lat, center_lng, markers=None, zoom=13, height=600, language="한국어"):
+    """Google Maps 컴포넌트 표시"""
+    # 언어 코드 변환
+    lang_code = config.LANGUAGE_CODES.get(language, "ko")
+    
+    # HTML 생성
+    map_html = create_google_maps_html(
+        api_key=api_key,
+        center_lat=center_lat,
+        center_lng=center_lng,
+        markers=markers,
+        zoom=zoom,
+        language=lang_code
+    )
+    
+    # HTML 컴포넌트로 표시
+    st.components.v1.html(map_html, height=height, scrolling=False)
