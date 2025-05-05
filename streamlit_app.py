@@ -15,17 +15,19 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 필요한 유틸리티 및 페이지 모듈 임포트
-from utils.ui import apply_custom_css
-from utils.data_loader import init_session_state
-from pages import login, menu, map, course, history, settings
-# settings 모듈 import 제거
+# 개별 모듈 직접 import (folders 대신 individual files)
+import utils
+import pages_login
+import pages_menu
+import pages_map
+import pages_course
+import pages_history
 
 # CSS 스타일 적용
-apply_custom_css()
+utils.apply_custom_css()
 
 # 세션 상태 초기화
-init_session_state()
+utils.init_session_state()
 
 # 페이지 라우팅
 def main():
@@ -35,18 +37,17 @@ def main():
     
     # 현재 페이지에 따라 해당 모듈의 함수 호출
     if st.session_state.current_page == "login":
-        login.show()
+        pages_login.show()
     elif st.session_state.current_page == "menu":
-        menu.show()
+        pages_menu.show()
     elif st.session_state.current_page == "map":
-        map.show()
+        pages_map.show()
     elif st.session_state.current_page == "course":
-        course.show()
+        pages_course.show()
     elif st.session_state.current_page == "history":
-        history.show()
-    # settings 관련 코드 제거
+        pages_history.show()
     else:
-        menu.show()  # 기본값
+        pages_menu.show()  # 기본값
 
 if __name__ == "__main__":
     main()
