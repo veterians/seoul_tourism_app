@@ -335,3 +335,6 @@ def show():
                                 st.rerun()
                     
                     if st.button("내비게이션 종료", use_container_width=True):
+                        st.session_state.navigation_active = False
+                        st.session_state.transport_mode = None
+                        st.rerun()
