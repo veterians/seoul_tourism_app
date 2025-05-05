@@ -54,7 +54,7 @@ def show():
         if st.button("관광 이력 보기", key="history_button", use_container_width=True):
             change_page("history")
             st.rerun()
-    
+            
     # 로그아웃 버튼
     st.markdown("---")
     if st.button("🔓 로그아웃", key="logout_button"):
