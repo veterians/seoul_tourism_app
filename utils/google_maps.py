@@ -208,7 +208,7 @@ def create_google_maps_html(api_key, center_lat, center_lng, markers=None, zoom=
     <body>
         <div id="map"></div>
         
-        <!-- 카테고리 필터 -->
+<!-- 카테고리 필터 -->
         <div class="map-controls" id="category-filter">
             <div style="margin-bottom: 8px; font-weight: bold;">카테고리 필터</div>
             <button id="filter-all" class="filter-button active" onclick="filterMarkers('all')">전체 보기</button>
