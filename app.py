@@ -18,7 +18,7 @@ st.set_page_config(
 # 필요한 유틸리티 및 페이지 모듈 임포트
 from utils.ui import apply_custom_css
 from utils.data_loader import init_session_state
-from pages import login, menu, map_page, course, history
+from pages import login, menu, map, course, history
 
 # CSS 스타일 적용
 apply_custom_css()
@@ -38,7 +38,7 @@ def main():
     elif st.session_state.current_page == "menu":
         menu.show()
     elif st.session_state.current_page == "map":
-        map_page.show()
+        map.show()
     elif st.session_state.current_page == "course":
         course.show()
     elif st.session_state.current_page == "history":
